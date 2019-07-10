@@ -1,10 +1,12 @@
 window.addEventListener('load', ()=> {
+    //set variables
     let long;
     let lat;
     let tempdescr = document.querySelector('.temperature-desciption');
     let tempdeg = document.querySelector('.degree');
     let loctzone = document.querySelector('.location-timezone');
 
+    //continue if geolocalisation allowed
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position=>{
             long = position.coords.longitude;
@@ -12,6 +14,7 @@ window.addEventListener('load', ()=> {
 
             var api = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/ea0fef12a3fb2abe25c7d4a45d9f18c8/"+lat+","+long;
 
+            //get data
             fetch(api)
                 .then(resp => {
                     return resp.json();
@@ -28,6 +31,7 @@ window.addEventListener('load', ()=> {
         });
     }
     
+    //icon part
     function seticon(icon, iconID){
         const skycons =  new Skycons({color:"white"});
         const currentIcon = icon.replace(/-/g, "_").toUpperCase();
